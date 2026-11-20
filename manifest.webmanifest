@@ -1,0 +1,11 @@
+{
+  "name": "Tempeltårnet",
+  "short_name": "Tempeltårnet",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "orientation": "landscape",
+  "background_color": "#111714",
+  "theme_color": "#111714",
+  "lang": "nb"
+}
