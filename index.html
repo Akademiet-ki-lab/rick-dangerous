@@ -106,11 +106,42 @@ kbd{font:inherit;color:var(--ink);border:1px solid var(--pad-edge);border-bottom
 @media (orientation:landscape) and (max-height:540px){
   .top{margin-bottom:4px}
   h1{font-size:16px}
-  body.touch .play{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px}
+}
+/* Mobil liggende: spillet fyller høyden, kontrollene ligger i hjørnene oppå */
+@media (orientation:landscape){
+  body.touch{
+    --ctl:min(132px, 34vh); --btn:min(58px, 15vh);
+    --sl:env(safe-area-inset-left, 0px); --sr:env(safe-area-inset-right, 0px);
+    --st:env(safe-area-inset-top, 0px); --sb:env(safe-area-inset-bottom, 0px);
+    height:100%;overflow:hidden;background:#000;
+  }
+  body.touch .wrap{
+    max-width:none;margin:0;padding:0;height:calc(100dvh - var(--st) - var(--sb));
+    display:flex;align-items:center;justify-content:center;
+  }
+  body.touch h1{display:none}
+  body.touch .top{position:fixed;bottom:calc(var(--sb) + 10px + var(--btn) * 1.75 + 18px);right:calc(var(--sr) + 10px);margin:0;z-index:5}
+  body.touch .mute{font-size:10px;padding:4px 8px;background:rgba(0,0,0,.45);color:#cfd8d2;border-color:rgba(255,255,255,.25)}
+  body.touch .play{display:block}
+  body.touch .stage{
+    width:min(calc(100vw - var(--sl) - var(--sr)), calc((100dvh - var(--st) - var(--sb)) * 1.538));
+  }
+  body.touch canvas{border:none;border-radius:0}
   body.touch .controls{display:contents}
-  body.touch .dpad{order:0}
-  body.touch .stage{order:1;--reserve:70px}
-  body.touch .actions{order:2}
+  body.touch .dpad{
+    position:fixed;z-index:4;width:var(--ctl);height:var(--ctl);
+    left:calc(var(--sl) + 10px);bottom:calc(var(--sb) + 10px);
+    background:rgba(20,26,23,.45);border-color:rgba(255,255,255,.22);
+  }
+  body.touch .dpad polygon{fill:rgba(230,240,234,.75)}
+  body.touch .dpad[data-dir="up"] .a-up,body.touch .dpad[data-dir="down"] .a-down,
+  body.touch .dpad[data-dir="left"] .a-left,body.touch .dpad[data-dir="right"] .a-right{fill:var(--arrow-on)}
+  body.touch .actions{
+    position:fixed;z-index:4;right:calc(var(--sr) + 10px);bottom:calc(var(--sb) + 10px);
+    grid-template-columns:var(--btn) var(--btn);grid-template-rows:calc(var(--btn) * .75) var(--btn);gap:8px;
+  }
+  body.touch .act{min-height:0;font-size:9px;border-radius:10px;opacity:.88}
+  body.touch .act.jump{font-size:12px;border-radius:999px}
 }
 </style>
 </head>
